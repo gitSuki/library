@@ -1,0 +1,19 @@
+* {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#header {
+    text-align: center;
+    padding: 2em;
+}
+
+#footer {
+    text-align: center;
+    padding: 2em;
+}
+
+#body {
+    display: flex;
+    height: 48em;
+    background-color: rgb(247, 245, 245);
+}
