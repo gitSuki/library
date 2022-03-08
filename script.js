@@ -1,6 +1,6 @@
 let myLibrary = []
 
-const display = document.getElementById('test')
+const display = document.getElementById('displayArea')
 
 function Novel(name, author, language, year) {
     //Assigning all the given parameter values to the object
@@ -16,7 +16,30 @@ Novel.prototype.toggleRead = function() {
 }
 
 Novel.prototype.addToLibrary = function() {
-    myLibrary.push(this.name)
+    myLibrary.push(this)
+}
+
+function displayLibrary(library) {
+    for (book of library) {
+        novelDiv = document.createElement('div')
+        novelName = document.createElement('div')
+        novelName.textContent = book.name
+
+        novelAuthor = document.createElement('div')
+        novelAuthor.textContent = book.author
+
+        novelLanguage = document.createElement('div')
+        novelLanguage.textContent = book.language
+
+        novelYear = document.createElement('div')
+        novelYear.textContent = book.year
+
+        display.append(novelDiv)
+        novelDiv.append(novelName)
+        novelDiv.append(novelAuthor)
+        novelDiv.append(novelLanguage)
+        novelDiv.append(novelYear)
+    }
 }
 
 let gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996)
@@ -27,4 +50,4 @@ gameOfThrones.addToLibrary()
 fateStayNight.addToLibrary()
 crimeAndPunishment.addToLibrary()
 
-display.textContent = gameOfThrones.name
+displayLibrary(myLibrary)
