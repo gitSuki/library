@@ -1,9 +1,10 @@
 let myLibrary = []
 
-function Novel(name, author, year) {
+function Novel(name, author, year, language) {
     this.name = name
     this.author = author
     this.year = year
+    this.language = language
     this.read = false
 }
 
