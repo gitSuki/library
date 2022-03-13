@@ -1,6 +1,6 @@
 let myLibrary = []
 
-const display = document.getElementById('displayArea')
+const dataTable = document.getElementById('displayTable')
 
 function Novel(name, author, language, year) {
     //Assigning all the given parameter values to the object
@@ -9,6 +9,7 @@ function Novel(name, author, language, year) {
     this.language = language
     this.year = year
     this.read = false
+    this.novelElement
 }
 
 Novel.prototype.toggleRead = function() {
@@ -21,24 +22,31 @@ Novel.prototype.addToLibrary = function() {
 
 function displayLibrary(library) {
     for (book of library) {
-        novelDiv = document.createElement('div')
-        novelName = document.createElement('div')
+        novelRow = document.createElement('tr')
+        novelRow.id = book.name
+        book.novelElement = novelRow
+
+        novelName = document.createElement('td')
         novelName.textContent = book.name
 
-        novelAuthor = document.createElement('div')
+        novelAuthor = document.createElement('td')
         novelAuthor.textContent = book.author
 
-        novelLanguage = document.createElement('div')
+        novelLanguage = document.createElement('td')
         novelLanguage.textContent = book.language
 
-        novelYear = document.createElement('div')
+        novelYear = document.createElement('td')
         novelYear.textContent = book.year
 
-        display.append(novelDiv)
-        novelDiv.append(novelName)
-        novelDiv.append(novelAuthor)
-        novelDiv.append(novelLanguage)
-        novelDiv.append(novelYear)
+        novelRead = document.createElement('td')
+        novelRead.textContent = book.read
+
+        dataTable.append(novelRow)
+        novelRow.append(novelName)
+        novelRow.append(novelAuthor)
+        novelRow.append(novelLanguage)
+        novelRow.append(novelYear)
+        novelRow.append(novelRead)
     }
 }
 
