@@ -12,27 +12,33 @@
 <body>
     <div>
         <p id="header">myLibrary</p>
-        <fieldset>
+        <div>
             <div>
                 <label for="book-name">Book Name</label>
-                <input type="text">
+                <input type="text" name="book_name">
             </div>
 
             <div>
                 <label for="author-name">Author</label>
-                <input type="text">
+                <input type="text" name="author_name">
             </div>
 
             <div>
                 <label for="original-language">Original Language</label>
-                <input type="text">
+                <input type="text" name="original_language">
             </div>
 
             <div>
-                <label for="publish-date">Publish date</label>
-                <input type="date">
+                <label for="publish-date">Publish Year</label>
+                <input type="text" name="publish_date">
             </div>
-        </fieldset>
+
+            <select name="status" id="readStatus">
+                <option value="read">Read</option>
+                <option value="notRead">Not Read</option>
+            </select>
+
+        </div>
         <button type="submit">Submit</button>
     </div>
     <table id="displayTable">

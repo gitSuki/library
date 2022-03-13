@@ -9,7 +9,7 @@ function Novel(name, author, language, year) {
     this.language = language
     this.year = year
     this.read = false
-    this.novelElement
+    this.novelElement //stores the respective html element
 }
 
 Novel.prototype.toggleRead = function() {
@@ -22,10 +22,12 @@ Novel.prototype.addToLibrary = function() {
 
 function displayLibrary(library) {
     for (book of library) {
+        //creating the html row element for the novel, assigning it an ID and also saving it as an object variable
         novelRow = document.createElement('tr')
         novelRow.id = book.name
         book.novelElement = novelRow
 
+        //filling out the table data with values from the book object 
         novelName = document.createElement('td')
         novelName.textContent = book.name
 
@@ -41,6 +43,7 @@ function displayLibrary(library) {
         novelRead = document.createElement('td')
         novelRead.textContent = book.read
 
+        //appending all the newly created html elements to the existing DOM
         dataTable.append(novelRow)
         novelRow.append(novelName)
         novelRow.append(novelAuthor)
