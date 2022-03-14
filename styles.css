@@ -68,3 +68,7 @@ table {
     height: 48em;
     background-color: rgb(247, 245, 245);
 }
+
+.delete-button {
+	background-color: aqua;
+}

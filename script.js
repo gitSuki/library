@@ -21,6 +21,10 @@ Novel.prototype.addToLibrary = function() {
     myLibrary.push(this)
 }
 
+Novel.prototype.removeFromLibrary = function() {
+    myLibrary.filter(novel => novel !== this)
+}
+
 Novel.prototype.displayNovel = function() {
     //creating the html row element for the novel, assigning it an ID and also saving it as an object variable
     const novelRow = document.createElement('tr')
@@ -45,6 +49,10 @@ Novel.prototype.displayNovel = function() {
     (this.read == false) ? readStatus = "Not Read" : readStatus = "Read"
     novelRead.textContent = readStatus
 
+    const novelDelete = document.createElement('button')
+    novelDelete.textContent = "Delete Novel"
+    novelDelete.classList.add('delete-button')
+
     //appending all the newly created html elements to the existing DOM
     dataTable.append(novelRow)
     novelRow.append(novelName)
@@ -52,6 +60,7 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelLanguage)
     novelRow.append(novelYear)
     novelRow.append(novelRead)
+    novelRow.append(novelDelete)
 }
 
 const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996)
