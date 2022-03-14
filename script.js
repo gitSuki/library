@@ -21,39 +21,37 @@ Novel.prototype.addToLibrary = function() {
     myLibrary.push(this)
 }
 
-function displayLibrary(library) {
-    for (book of library) {
-        //creating the html row element for the novel, assigning it an ID and also saving it as an object variable
-        const novelRow = document.createElement('tr')
-        novelRow.id = book.name
-        book.novelElement = novelRow
+Novel.prototype.displayNovel = function() {
+    //creating the html row element for the novel, assigning it an ID and also saving it as an object variable
+    const novelRow = document.createElement('tr')
+    novelRow.id = this.name
+    this.novelElement = novelRow
 
-        //filling out the table data with values from the book object 
-        const novelName = document.createElement('td')
-        novelName.textContent = book.name
+    //filling out the table data with values from the novel object 
+    const novelName = document.createElement('td')
+    novelName.textContent = this.name
 
-        const novelAuthor = document.createElement('td')
-        novelAuthor.textContent = book.author
+    const novelAuthor = document.createElement('td')
+    novelAuthor.textContent = this.author
 
-        const novelLanguage = document.createElement('td')
-        novelLanguage.textContent = book.language
+    const novelLanguage = document.createElement('td')
+    novelLanguage.textContent = this.language
 
-        const novelYear = document.createElement('td')
-        novelYear.textContent = book.year
+    const novelYear = document.createElement('td')
+    novelYear.textContent = this.year
 
-        const novelRead = document.createElement('td')
-        let readStatus
-        (book.read == false) ? readStatus = "Not Read" : readStatus = "Read"
-        novelRead.textContent = readStatus
+    const novelRead = document.createElement('td')
+    let readStatus
+    (this.read == false) ? readStatus = "Not Read" : readStatus = "Read"
+    novelRead.textContent = readStatus
 
-        //appending all the newly created html elements to the existing DOM
-        dataTable.append(novelRow)
-        novelRow.append(novelName)
-        novelRow.append(novelAuthor)
-        novelRow.append(novelLanguage)
-        novelRow.append(novelYear)
-        novelRow.append(novelRead)
-    }
+    //appending all the newly created html elements to the existing DOM
+    dataTable.append(novelRow)
+    novelRow.append(novelName)
+    novelRow.append(novelAuthor)
+    novelRow.append(novelLanguage)
+    novelRow.append(novelYear)
+    novelRow.append(novelRead)
 }
 
 const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996)
@@ -64,7 +62,9 @@ gameOfThrones.addToLibrary()
 fateStayNight.addToLibrary()
 crimeAndPunishment.addToLibrary()
 
-displayLibrary(myLibrary)
+for (let novel of myLibrary) {
+    novel.displayNovel()
+}
 
 submitButton.addEventListener('click', function() {
     //saving the user input in all of the input fields as variables
@@ -85,5 +85,5 @@ submitButton.addEventListener('click', function() {
 
     //adds the new book to the library and updates the html page layout to display the library
     newBook.addToLibrary()
-    displayLibrary(myLibrary)
+    newBook.displayNovel()
 })
