@@ -84,68 +84,30 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelRead)
     novelRow.append(novelDelete)
 
-    //adds all the relevant event listeners to be able to dynamically delete and adjust created novel objects
-    updateNovelListeners()
+    //adds all the relevant event listeners to be able to delete and adjust the read status of dynamically created novel objects
+    updateNovelListeners(this)
 }
 
-function updateNovelListeners(){
-    deleteNovelListeners()
-    updateReadListeners()
-}
+function updateNovelListeners (Novel) {
+    //creates a nodelist of all the child elements of the row associatied with the novel in the row
+    elementList = Novel.novelElement.childNodes
 
-function deleteNovelListeners () {
-    //creates a nodelist of all the DOM elements with the delete-button class
-    deleteButtons = document.querySelectorAll('.delete-button')
-
-    //loops through each button in the deleteButtons nodelist
-    deleteButtons.forEach(button => {
+    //loops through each element in the nodelist
+    elementList.forEach(element => {
         //and adds an event listener for each button that will activate on click
-        button.addEventListener('click', event => {
+        element.addEventListener('click', event => {
     
-            //compares the current button with the all books in the user's library
-            for (book of myLibrary) {
-                if (book.name === button.parentNode.id) {
-                    //deletes the book which matches the ID given to the row in the DOM
-                    book.undisplayNovel()
-                }
+            if (element.classList.contains('delete-button')) {
+                //deletes the novel which matches the ID given to the row in the DOM
+                Novel.undisplayNovel()
             }
+            else if (element.classList.contains('read-button')) {
+                //adjusts the read status of the novel
+                Novel.toggleRead()
+                Novel.adjustReadText()
+            } 
         })
     })
-}
-
-function updateReadListeners() {
-    //creates a nodelist of all the DOM elements with the read-button class
-    readButtons = document.querySelectorAll('.read-button')
-
-        //loops through each button in the readbuttons nodelist
-        readButtons.forEach(button => {
-            //and adds an event listener for each button that will activate on click
-            button.addEventListener('click', event => {
-        
-                //compares the current button with the all books in the user's library
-                for (book of myLibrary) {
-                    if (book.name == button.parentNode.id) {
-                        //deletes the book which matches the ID given to the row in the DOM
-                        book.toggleRead()
-                        let readStatus
-                        (book.read == false) ? readStatus = "Not Read" : readStatus = "Read"
-                        book.readElement.textContent = readStatus
-                    }
-                }
-            })
-        })
-}
-
-const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996, true)
-const fateStayNight = new Novel ("Fate/Stay Night", "Kinoko Nasu", "Japanese", 2004, true)
-const crimeAndPunishment = new Novel("Crime and Punishment", "Fyodor Dostaevsky", "Russian", 1866, false)
-
-gameOfThrones.addToLibrary()
-fateStayNight.addToLibrary()
-crimeAndPunishment.addToLibrary()
-
-for (let novel of myLibrary) {
-    novel.displayNovel()
 }
 
 submitButton.addEventListener('click', function() {
@@ -162,3 +124,15 @@ submitButton.addEventListener('click', function() {
     newBook.addToLibrary()
     newBook.displayNovel()
 })
+
+const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996, true)
+const fateStayNight = new Novel ("Fate/Stay Night", "Kinoko Nasu", "Japanese", 2004, true)
+const crimeAndPunishment = new Novel("Crime and Punishment", "Fyodor Dostaevsky", "Russian", 1866, false)
+
+gameOfThrones.addToLibrary()
+fateStayNight.addToLibrary()
+crimeAndPunishment.addToLibrary()
+
+for (let novel of myLibrary) {
+    novel.displayNovel()
+}
