@@ -2,6 +2,7 @@ let myLibrary = []
 
 const dataTable = document.getElementById('displayTable')
 const submitButton = document.getElementById('submitButton')
+let id = 0
 
 function Novel(name, author, language, year) {
     //Assigning all the given parameter values to the object
@@ -10,6 +11,7 @@ function Novel(name, author, language, year) {
     this.language = language
     this.year = year
     this.read = false
+    this.id = id++
     this.novelElement //stores the respective html element
 }
 
@@ -22,7 +24,13 @@ Novel.prototype.addToLibrary = function() {
 }
 
 Novel.prototype.removeFromLibrary = function() {
-    myLibrary.filter(novel => novel !== this)
+    myLibrary.splice(this.id, 1)
+}
+
+Novel.prototype.undisplayNovel = function() {
+    this.removeFromLibrary()
+    const novelRow = document.getElementById(this.name)
+    novelRow.remove()
 }
 
 Novel.prototype.displayNovel = function() {
