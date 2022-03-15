@@ -25,11 +25,13 @@ Novel.prototype.addToLibrary = function() {
 }
 
 Novel.prototype.removeFromLibrary = function() {
+    //removes the book at the specific ID from the array
     myLibrary.splice(this.id, 1)
 }
 
 Novel.prototype.undisplayNovel = function() {
     this.removeFromLibrary()
+    //removes all relevant DOM elements associated with the Novel in the HTML table
     const novelRow = document.getElementById(this.name)
     novelRow.remove()
 }
@@ -70,6 +72,8 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelYear)
     novelRow.append(novelRead)
     novelRow.append(novelDelete)
+
+    //adds all the relevant event listeners to be able to delete dynamically created novel objects
     deleteListeners()
 }
 
@@ -108,14 +112,18 @@ submitButton.addEventListener('click', function() {
 })
 
 function deleteListeners(){
+    //creates a nodelist of all the DOM elements with the delete-button class
     deleteButtons = document.querySelectorAll('.delete-button')
     
+    //loops through each button in the deleteButtons nodelist
     deleteButtons.forEach(button => {
+        //and adds an event listener for each button that will activate on click
         button.addEventListener('click', event => {
-            console.log(button.parentNode.id)
-    
+  
+            //compares the current button with the all books in the user's library
             for (book of myLibrary) {
                 if (book.name === button.parentNode.id) {
+                    //deletes the book which matches the ID given to the row in the DOM
                     book.undisplayNovel()
                 }
             }
