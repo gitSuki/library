@@ -2,6 +2,7 @@ let myLibrary = []
 
 const dataTable = document.getElementById('displayTable')
 const submitButton = document.getElementById('submitButton')
+let deleteButtons = document.querySelectorAll('.delete-button')
 let id = 0
 
 function Novel(name, author, language, year) {
@@ -69,6 +70,7 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelYear)
     novelRow.append(novelRead)
     novelRow.append(novelDelete)
+    deleteListeners()
 }
 
 const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996)
@@ -104,3 +106,19 @@ submitButton.addEventListener('click', function() {
     newBook.addToLibrary()
     newBook.displayNovel()
 })
+
+function deleteListeners(){
+    deleteButtons = document.querySelectorAll('.delete-button')
+    
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', event => {
+            console.log(button.parentNode.id)
+    
+            for (book of myLibrary) {
+                if (book.name === button.parentNode.id) {
+                    book.undisplayNovel()
+                }
+            }
+        })
+    })
+}
