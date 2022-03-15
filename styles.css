@@ -72,3 +72,7 @@ table {
 .delete-button {
 	background-color: aqua;
 }
+
+.read-button {
+	background-color: aquamarine;
+}

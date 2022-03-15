@@ -5,19 +5,29 @@ const submitButton = document.getElementById('submitButton')
 let deleteButtons = document.querySelectorAll('.delete-button')
 let id = 0
 
-function Novel(name, author, language, year) {
+function Novel(name, author, language, year, readValue) {
     //Assigning all the given parameter values to the object
     this.name = name
     this.author = author
     this.language = language
     this.year = year
-    this.read = false
-    this.id = id++
-    this.novelElement //stores the respective html element
+    this.read = readValue
+    this.id = id++ //increases the ID for each new Novel object made
+    this.novelElement //stores the respective html row element
+    this.readElement //stores the respective html element for the novel's read status
 }
 
 Novel.prototype.toggleRead = function() {
     (this.read == false) ? this.read = true : this.read = false
+}
+
+Novel.prototype.adjustReadText = function() {
+    if (this.read == false) {
+        this.readElement.textContent = "Not Read"
+    }
+    else {
+        this.readElement.textContent = "Read"
+    }
 }
 
 Novel.prototype.addToLibrary = function() {
@@ -55,10 +65,11 @@ Novel.prototype.displayNovel = function() {
     const novelYear = document.createElement('td')
     novelYear.textContent = this.year
 
-    const novelRead = document.createElement('td')
-    let readStatus
-    (this.read == false) ? readStatus = "Not Read" : readStatus = "Read"
-    novelRead.textContent = readStatus
+    const novelRead = document.createElement('button')
+    this.readElement = novelRead
+    this.adjustReadText()
+    novelRead.classList.add('read-button')
+    this.readElement = novelRead
 
     const novelDelete = document.createElement('button')
     novelDelete.textContent = "Delete Novel"
@@ -73,13 +84,61 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelRead)
     novelRow.append(novelDelete)
 
-    //adds all the relevant event listeners to be able to delete dynamically created novel objects
-    deleteListeners()
+    //adds all the relevant event listeners to be able to dynamically delete and adjust created novel objects
+    updateNovelListeners()
 }
 
-const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996)
-const fateStayNight = new Novel ("Fate/Stay Night", "Kinoko Nasu", "Japanese", 2004)
-const crimeAndPunishment = new Novel("Crime and Punishment", "Fyodor Dostaevsky", "Russian", 1866)
+function updateNovelListeners(){
+    deleteNovelListeners()
+    updateReadListeners()
+}
+
+function deleteNovelListeners () {
+    //creates a nodelist of all the DOM elements with the delete-button class
+    deleteButtons = document.querySelectorAll('.delete-button')
+
+    //loops through each button in the deleteButtons nodelist
+    deleteButtons.forEach(button => {
+        //and adds an event listener for each button that will activate on click
+        button.addEventListener('click', event => {
+    
+            //compares the current button with the all books in the user's library
+            for (book of myLibrary) {
+                if (book.name === button.parentNode.id) {
+                    //deletes the book which matches the ID given to the row in the DOM
+                    book.undisplayNovel()
+                }
+            }
+        })
+    })
+}
+
+function updateReadListeners() {
+    //creates a nodelist of all the DOM elements with the read-button class
+    readButtons = document.querySelectorAll('.read-button')
+
+        //loops through each button in the readbuttons nodelist
+        readButtons.forEach(button => {
+            //and adds an event listener for each button that will activate on click
+            button.addEventListener('click', event => {
+        
+                //compares the current button with the all books in the user's library
+                for (book of myLibrary) {
+                    if (book.name == button.parentNode.id) {
+                        //deletes the book which matches the ID given to the row in the DOM
+                        book.toggleRead()
+                        let readStatus
+                        (book.read == false) ? readStatus = "Not Read" : readStatus = "Read"
+                        book.readElement.textContent = readStatus
+                    }
+                }
+            })
+        })
+}
+
+const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996, true)
+const fateStayNight = new Novel ("Fate/Stay Night", "Kinoko Nasu", "Japanese", 2004, true)
+const crimeAndPunishment = new Novel("Crime and Punishment", "Fyodor Dostaevsky", "Russian", 1866, false)
 
 gameOfThrones.addToLibrary()
 fateStayNight.addToLibrary()
@@ -97,36 +156,9 @@ submitButton.addEventListener('click', function() {
     const novelDate = document.getElementById('publish_date').value
 
     //creating a new Novel object with the variables
-    const newBook = new Novel (novelName, novelAuthor, novelLanguage, novelDate)
-
-    //checks the read status from the dropdown menu in the input section
-    const novelRead = document.getElementById('readStatus').value
-    //runs the toggleRead function if the read selection was chosen from the dropdown menu
-    if (novelRead == "read") {
-        newBook.toggleRead()
-    } 
+    const newBook = new Novel (novelName, novelAuthor, novelLanguage, novelDate, document.getElementById('readStatus').value)
 
     //adds the new book to the library and updates the html page layout to display the library
     newBook.addToLibrary()
     newBook.displayNovel()
 })
-
-function deleteListeners(){
-    //creates a nodelist of all the DOM elements with the delete-button class
-    deleteButtons = document.querySelectorAll('.delete-button')
-    
-    //loops through each button in the deleteButtons nodelist
-    deleteButtons.forEach(button => {
-        //and adds an event listener for each button that will activate on click
-        button.addEventListener('click', event => {
-  
-            //compares the current button with the all books in the user's library
-            for (book of myLibrary) {
-                if (book.name === button.parentNode.id) {
-                    //deletes the book which matches the ID given to the row in the DOM
-                    book.undisplayNovel()
-                }
-            }
-        })
-    })
-}
