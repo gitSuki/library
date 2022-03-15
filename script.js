@@ -15,10 +15,11 @@ function Novel(name, author, language, year, readValue) {
     this.id = id++ //increases the ID for each new Novel object made
     this.novelElement //stores the respective html row element
     this.readElement //stores the respective html element for the novel's read status
+    this.addToLibrary()
 }
 
 function verifyReadValue(readValue) {
-    if (readValue == "read") {
+    if (readValue == "read" || readValue == true) {
         return true
     }
     else {
@@ -127,27 +128,29 @@ submitButton.addEventListener('click', function() {
     let novelDate = document.getElementById('publish_date')
     let novelRead = document.getElementById('readStatus')
 
-    //creating a new Novel object with the variables
-    const newBook = new Novel (novelName.value, novelAuthor.value, novelLanguage.value, novelDate.value, novelRead.value)
+    if (novelName.value.length === 0 || novelAuthor.value.length === 0 || novelLanguage.value.length === 0 || novelDate.value.length === 0) {
+        alert("Please fill in all the fields")
+    }
+    else {
+        //creating a new Novel object with the variables
+        const newBook = new Novel (novelName.value, novelAuthor.value, novelLanguage.value, novelDate.value, novelRead.value)
 
-    //adds the new book to the library and updates the html page layout to display the library
-    newBook.addToLibrary()
-    newBook.displayNovel()
+        //updates the html page layout to display the library
+        newBook.displayNovel()
 
-    //resetting the input fields to be blank after inputting
-    novelName.value = ""
-    novelAuthor.value = ""
-    novelLanguage.value = ""
-    novelDate.value = ""
+        //resetting the input fields to be blank after inputting
+        novelName.value = ""
+        novelAuthor.value = ""
+        novelLanguage.value = ""
+        novelDate.value = ""
+    }
 })
 
 const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996, true)
+const lordOfTheRings = new Novel ("Lord of the Rings", "J.R.R. Tolkien", "English", 1954, false)
+const dragonBall = new Novel ("Dragon Ball", "Akira Toriyama", "Japanese", 1984, true)
 const fateStayNight = new Novel ("Fate/Stay Night", "Kinoko Nasu", "Japanese", 2004, true)
 const crimeAndPunishment = new Novel("Crime and Punishment", "Fyodor Dostaevsky", "Russian", 1866, false)
-
-gameOfThrones.addToLibrary()
-fateStayNight.addToLibrary()
-crimeAndPunishment.addToLibrary()
 
 for (let novel of myLibrary) {
     novel.displayNovel()
