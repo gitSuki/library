@@ -11,10 +11,19 @@ function Novel(name, author, language, year, readValue) {
     this.author = author
     this.language = language
     this.year = year
-    this.read = readValue
+    this.read = verifyReadValue(readValue)
     this.id = id++ //increases the ID for each new Novel object made
     this.novelElement //stores the respective html row element
     this.readElement //stores the respective html element for the novel's read status
+}
+
+function verifyReadValue(readValue) {
+    if (readValue == "read") {
+        return true
+    }
+    else {
+        return false
+    }
 }
 
 Novel.prototype.toggleRead = function() {
@@ -85,12 +94,12 @@ Novel.prototype.displayNovel = function() {
     novelRow.append(novelDelete)
 
     //adds all the relevant event listeners to be able to delete and adjust the read status of dynamically created novel objects
-    updateNovelListeners(this)
+    this.updateNovelListeners()
 }
 
-function updateNovelListeners (Novel) {
+Novel.prototype.updateNovelListeners = function() {
     //creates a nodelist of all the child elements of the row associatied with the novel in the row
-    elementList = Novel.novelElement.childNodes
+    elementList = this.novelElement.childNodes
 
     //loops through each element in the nodelist
     elementList.forEach(element => {
@@ -99,12 +108,12 @@ function updateNovelListeners (Novel) {
     
             if (element.classList.contains('delete-button')) {
                 //deletes the novel which matches the ID given to the row in the DOM
-                Novel.undisplayNovel()
+                this.undisplayNovel()
             }
             else if (element.classList.contains('read-button')) {
                 //adjusts the read status of the novel
-                Novel.toggleRead()
-                Novel.adjustReadText()
+                this.toggleRead()
+                this.adjustReadText()
             } 
         })
     })
@@ -112,17 +121,24 @@ function updateNovelListeners (Novel) {
 
 submitButton.addEventListener('click', function() {
     //saving the user input in all of the input fields as variables
-    const novelName = document.getElementById('book_name').value
-    const novelAuthor = document.getElementById('author_name').value
-    const novelLanguage = document.getElementById('original_language').value
-    const novelDate = document.getElementById('publish_date').value
+    let novelName = document.getElementById('book_name')
+    let novelAuthor = document.getElementById('author_name')
+    let novelLanguage = document.getElementById('original_language')
+    let novelDate = document.getElementById('publish_date')
+    let novelRead = document.getElementById('readStatus')
 
     //creating a new Novel object with the variables
-    const newBook = new Novel (novelName, novelAuthor, novelLanguage, novelDate, document.getElementById('readStatus').value)
+    const newBook = new Novel (novelName.value, novelAuthor.value, novelLanguage.value, novelDate.value, novelRead.value)
 
     //adds the new book to the library and updates the html page layout to display the library
     newBook.addToLibrary()
     newBook.displayNovel()
+
+    //resetting the input fields to be blank after inputting
+    novelName.value = ""
+    novelAuthor.value = ""
+    novelLanguage.value = ""
+    novelDate.value = ""
 })
 
 const gameOfThrones = new Novel ("A Game of Thrones", "George R.R. Martin", "English", 1996, true)
