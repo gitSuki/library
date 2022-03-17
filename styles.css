@@ -49,8 +49,21 @@ table {
 
 /* Custom CSS below */
 
+@font-face {
+    font-family: kiona-regular;
+    src: url(./resources/Kiona-Regular.ttf);
+}
+
 :root {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: kiona-regular, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.contents {
+	background-color: aliceblue;
+}
+
+.input-section {
+	justify-content: center;
 }
 
 #header {
@@ -58,15 +71,14 @@ table {
     padding: 2em;
 }
 
+.input-area {
+	display: flex;
+	justify-content: center;
+}
+
 #footer {
     text-align: center;
     padding: 2em;
-}
-
-#body {
-    display: flex;
-    height: 48em;
-    background-color: rgb(247, 245, 245);
 }
 
 .delete-button {

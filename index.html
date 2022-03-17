@@ -10,45 +10,47 @@
     <script src="./script.js" defer></script>
 </head>
 <body>
-    <div>
-        <p id="header">myLibrary</p>
-        <div>
-            <div>
-                <label for="book-name">Book Name</label>
-                <input type="text" id="book_name" name="book_name">
+    <div class="contents">
+        <div class="input-section">
+            <p id="header">myLibrary</p>
+            <div class="input-area">
+                <div>
+                    <label for="book-name">Book Name</label>
+                    <input type="text" id="book_name" name="book_name">
+                </div>
+
+                <div>
+                    <label for="author-name">Author</label>
+                    <input type="text" id="author_name" name="author_name">
+                </div>
+
+                <div>
+                    <label for="original-language">Original Language</label>
+                    <input type="text" id="original_language" name="original_language">
+                </div>
+
+                <div>
+                    <label for="publish-date">Publish Year</label>
+                    <input type="text" id="publish_date" name="publish_date">
+                </div>
+
+                <select name="status" id="readStatus">
+                    <option value="read">Read</option>
+                    <option value="notRead">Not Read</option>
+                </select>
+
             </div>
-
-            <div>
-                <label for="author-name">Author</label>
-                <input type="text" id="author_name" name="author_name">
-            </div>
-
-            <div>
-                <label for="original-language">Original Language</label>
-                <input type="text" id="original_language" name="original_language">
-            </div>
-
-            <div>
-                <label for="publish-date">Publish Year</label>
-                <input type="text" id="publish_date" name="publish_date">
-            </div>
-
-            <select name="status" id="readStatus">
-                <option value="read">Read</option>
-                <option value="notRead">Not Read</option>
-            </select>
-
+            <button type="submit" id="submitButton">Submit</button>
         </div>
-        <button type="submit" id="submitButton">Submit</button>
+        <table id="displayTable">
+            <tr id="tableHeader">
+                <th>Name</th>
+                <th>Author</th>
+                <th>Original Language</th>
+                <th>Year Published</th>
+                <th>Status</th>
+            </tr>
+        </table>
     </div>
-    <table id="displayTable">
-        <tr id="tableHeader">
-            <th>Name</th>
-            <th>Author</th>
-            <th>Original Language</th>
-            <th>Year Published</th>
-            <th>Status</th>
-        </tr>
-    </table>
 </body>
 </html>
