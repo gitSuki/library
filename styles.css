@@ -92,7 +92,7 @@ label{
 
 input {
 	margin-top: 0.25em;
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 	font-size: 20px;
 	width: 10em;
 	background-color: #404040;
@@ -111,8 +111,8 @@ input:focus {
 	font-size: 16px;
 	font-family: inherit;
 	font-weight: 700;
-	color: white;
-	background-color: #94a3b8;
+	color: black;
+	background-color: #76d6ff;
 	border: none;
 	border-radius: 0.35em;
 	transition: 0.4s;
@@ -121,20 +121,75 @@ input:focus {
 }
 
 #submitButton:hover {
-	color: black;
-	background-color: #76d6ff;
+	color: white;
+	background-color: #94a3b8;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr {
+	border-bottom: 1px solid #d4d4d4;
+	padding-bottom: 0.75em;
+	padding-top: 0.75em;
+}
+
+tr:last-child {
+	border-bottom: none;
+}
+
+td:hover {
+	font-weight: 700;
+}
+
+#displayTable {
+	margin-top: 3em;
+}
+
+#tableHeader {
+	display: grid;
+	grid-template-columns: repeat(4, 2fr) repeat(2, 1fr);
+	text-align: left;
+	font-size: 14px;
+	font-weight: 700;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #d4d4d4;
 }
 
 .novel-row {
-	color: blue;
-	display: flex;
-	justify-content: space-between;
+	margin-top: 0.5em;
+	display: grid;
+	grid-template-columns: repeat(4, 2fr) repeat(2, 1fr);
+	align-items: center;
 }
 
 .delete-button {
-	background-color: aqua;
+	margin-left: 1em;
+	font-family: inherit;
+	background-color: #ef4444;
+	color: white;
+	padding: 0.5em;
+	border: none;
+	border-radius: 0.35em;
+	transition: 0.4s;
+	width: 7.5em;
+}
+
+.delete-button:hover {
+	background-color: #dc2626;
 }
 
 .read-button {
-	background-color: aquamarine;
+	font-family: inherit;
+	background-color: #fafaf9;
+	padding: 0.5em;
+	border-color: #d4d4d4;
+	border-radius: 0.35em;
+	transition: 0.4s;
+	width: 7.5em;
+}
+
+.read-button:hover {
+	background-color: #d4d4d4;
 }

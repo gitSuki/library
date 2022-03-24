@@ -83,7 +83,7 @@ Novel.prototype.displayNovel = function() {
     this.readElement = novelRead
 
     const novelDelete = document.createElement('button')
-    novelDelete.textContent = "Delete Novel"
+    novelDelete.textContent = "Delete"
     novelDelete.classList.add('delete-button')
 
     //appending all the newly created html elements to the existing DOM
