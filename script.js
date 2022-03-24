@@ -60,6 +60,7 @@ Novel.prototype.displayNovel = function() {
     //creating the html row element for the novel, assigning it an ID and also saving it as an object variable
     const novelRow = document.createElement('tr')
     novelRow.id = this.name
+    novelRow.classList.add('novel-row')
     this.novelElement = novelRow
 
     //filling out the table data with values from the novel object 

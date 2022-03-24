@@ -58,8 +58,15 @@ table {
     font-family: kiona-regular, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+body {
+	display: grid;
+	grid-template-columns: 1fr 2.5fr 1fr;
+	grid-template-areas: ". testing .";
+	background-color: #f5f5f4;
+}
+
 .contents {
-	background-color: aliceblue;
+	grid-area: testing;
 }
 
 .input-section {
@@ -67,18 +74,61 @@ table {
 }
 
 #header {
-    text-align: center;
-    padding: 2em;
+    font-size: 40px;
+	margin-top: 2em;
+	margin-bottom: 1em;
 }
 
 .input-area {
-	display: flex;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
 }
 
-#footer {
-    text-align: center;
-    padding: 2em;
+label{
+	margin-left: 0.15em;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+input {
+	margin-top: 0.25em;
+	margin-bottom: 0.5em;
+	font-size: 20px;
+	width: 10em;
+	background-color: #404040;
+	border: 0.05em solid #a1a1aa;
+	border-radius: 0.35em;
+	color: #f5f5f4;
+	padding: 0.1em;
+	transition: 0.1s;
+}
+
+input:focus {
+	outline: solid #94a3b8;
+}
+
+#submitButton {
+	font-size: 16px;
+	font-family: inherit;
+	font-weight: 700;
+	color: white;
+	background-color: #94a3b8;
+	border: none;
+	border-radius: 0.35em;
+	transition: 0.4s;
+	width: 7.5em;
+	padding: 0.5em;
+}
+
+#submitButton:hover {
+	color: black;
+	background-color: #76d6ff;
+}
+
+.novel-row {
+	color: blue;
+	display: flex;
+	justify-content: space-between;
 }
 
 .delete-button {
