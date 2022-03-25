@@ -1,5 +1,5 @@
 # library
-A simple library webapp that can store 
+A simple library webapp
 
 [Live Demo](https://github.com/gitSuki/library/deployments/activity_log?environment=github-pages)
 
